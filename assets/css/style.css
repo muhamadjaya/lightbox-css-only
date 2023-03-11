@@ -1,0 +1,219 @@
+/* Font */
+@font-face {
+    font-family: 'BebasNeue';
+    src: url(./../font/BebasNeue.woff) format('woff');
+}
+
+
+/* Main Style */
+body {
+    font: 18px/36px 'BebasNeue', 'Arial Narrow', arial, sans-serif;
+    background-color: #ddd;
+}
+
+h1 {
+    font-size: 80px;
+    margin: 50px 0;
+    text-align: center;
+    text-shadow: 1px 1px 1px white;
+}
+
+.container {
+    width: 850px;
+    background-color: #bbb;
+    margin: auto;
+    padding: 30px;
+    box-shadow: 0 0 3px 3px rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+.gallery li {
+    width: 150px;
+    height: 150px;
+    /* overflow: hidden; */
+    border: 5px solid #666; 
+    float: left;
+    margin-right: 10px;
+    position: relative;
+}
+
+.gallery li, 
+.gallery li a img,
+.gallery li a span {
+    border-radius: 50%;
+}
+
+.gallery li span {
+    display: block;
+    width: 150px;
+    height: 150px;
+    background-color: rgba(200, 200, 200, .5);
+    position: absolute;
+    top: 0;    
+    line-height: 150px;
+    text-align: center;
+    font-size: 23px;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 1px 1px 1px #ddd;
+
+    /* hilangkan span sebelum hover */
+    opacity: 0;
+    transition: .3s;
+    transform: scale(0) rotate(0);
+}
+
+.gallery li a:hover span {
+    opacity: 1;
+    transform: scale(1) rotate(360deg);
+}
+
+
+/* Navigasi */
+.next {
+    width: 35px;
+    height: 58px;
+    background-image: url(./../img/full/next.png);
+    position: absolute;
+    text-indent: -9999px;
+    top: 40%;
+    margin-left: 40px;
+    opacity: 0;
+}
+
+.prev {
+    width: 35px;
+    height: 58px;
+    background-image: url(./../img/full/prev.png);
+    position: absolute;
+    text-indent: -9999px;
+    top: 40%;
+    margin-left: -75px;
+    opacity: 0;
+}
+
+
+
+/* clearfix */
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    *zoom: 1;
+} 
+
+/* overlay */
+.overlay {
+    /* Menghilangkan foto full */
+    /* Jika width dan height tidak diberi nilai 0 maka nilai awalnya adalah auto */
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    /*  */
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 999;
+    transition: .5s;
+
+    /* Setting Foto Overlay */
+    text-align: center;
+    padding: 100px 0;
+}
+
+.overlay:target {
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    /* Memunculkan foto full */
+    width: auto;
+    height: auto;
+    /*  */
+}
+
+.overlay img {
+    max-height: 100%;
+    box-shadow: 4px 4px 5px rgba(83, 79, 79, 0.8), 
+                -4px -4px 5px rgba(83, 79, 79, 0.8);
+}
+
+
+.overlay:target img {
+    animation: fade 1s;
+}
+
+.overlay .close {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    background-color: black;
+    border: 1px solid white;
+    line-height: 14px;
+    padding: 5px;
+
+    /* atur posisi tombol close */
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    margin-left: -30px;
+
+    /* supaya tombol closenya hilang terlebih dahulu diawal */
+    opacity: 0;
+}
+
+.overlay:target .close {
+    animation: slideDownFade .5s .5s forwards;
+}
+
+
+.overlay:target .next, 
+.overlay:target .prev {
+    animation: fade .5s .5s forwards;
+}
+
+
+/* animasi */
+@keyframes zoomAndFade {
+     0% {
+        transform: scale(0);
+        opacity: 0;
+     }
+
+     100% {
+        transform: scale(1);
+        opacity: 1;
+     }
+}
+
+@keyframes slideDownFade {
+    0% {
+        opacity: 0;
+        margin-top: -20px;
+    }
+
+    100% {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
